@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuokas <msuokas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:23:12 by msuokas           #+#    #+#             */
-/*   Updated: 2024/11/01 14:40:04 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/11/20 11:27:06 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nelem, size_t elsize)
+void	*ft_calloc(size_t count, size_t size)
 {
-	void	*ptr;
+	char		*ptr;
 
-	if (nelem == 0 || elsize == 0)
-		return NULL;
-	ptr = malloc(nelem * sizeof(elsize));
+	if (count != 0 && size != 0 && count > SIZE_MAX / size)
+		return (NULL);
+	ptr = malloc(count * size);
 	if (ptr == NULL)
 		return (NULL);
-	else
-		printf("Memory allocation successfull!\n");
+	ft_memset(ptr, 0, count * size);
 	return (ptr);
 }

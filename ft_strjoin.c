@@ -3,44 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuokas <msuokas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:47:08 by msuokas           #+#    #+#             */
-/*   Updated: 2024/11/01 14:40:40 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/11/18 09:53:47 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-Joins two strings into a new allocated memory according to the needed size.
-Returns a pointer to the new string or NULL if allocation fails.
-*/
-int	count(char const *s1, char const *s2)
-{
-	int	total_length;
-
-	total_length = 0;
-	total_length += ft_strlen(s1);
-	total_length += ft_strlen(s2);
-	return (total_length);
-}
-
-char	*allocate_memory(int total_length)
-{
-	char	*ptr;
-	ptr = malloc(total_length * sizeof(char) + 1);
-	if (ptr == NULL)
-		return (0);
-	return (ptr);
-}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int total_length;
-	char	*joinedstr;
-	total_length = count(s1, s2);
-	joinedstr = allocate_memory(total_length);
-	ft_strlcat(joinedstr, s1, total_length);
-	ft_strlcat(joinedstr, s2, total_length);
-	return (joinedstr);
+	char	*new_str;
+	int		total_length;
+	int		s1_len;
+	int		s2_len;
+
+	if (!s1 || !s2)
+		return (NULL);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	total_length = s1_len + s2_len + 1;
+	new_str = ft_calloc(total_length, sizeof(char));
+	if (new_str == NULL)
+		return (NULL);
+	ft_memmove(new_str, s1, s1_len);
+	ft_memmove(new_str + s1_len, s2, s2_len);
+	return (new_str);
 }

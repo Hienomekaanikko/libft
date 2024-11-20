@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:13:31 by msuokas           #+#    #+#             */
-/*   Updated: 2024/10/29 12:13:53 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/11/18 12:35:54 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 126)
+	if (c >= 0 && c <= 127)
 	{
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
