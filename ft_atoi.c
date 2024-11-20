@@ -3,48 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuokas <msuokas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:31:44 by msuokas           #+#    #+#             */
-/*   Updated: 2024/11/01 15:05:55 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/11/18 11:43:49 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-Convert initial portion of numbers in a string to an integer value.
-Returns the integer value.
-*/
-int ft_atoi(const char *str)
+
+static const char	*skip_spaces(const char *str)
 {
-	int	result;
 	int	i;
-	int	minuses;
-	int	pluses;
+
+	i = 0;
+	while ((str[i] >= 8 && str[i] <= 13) || str[i] == 32)
+		i++;
+	return (&str[i]);
+}
+
+int	ft_atoi(const char *str)
+{
+	long	result;
+	int		i;
+	long	sign;
 
 	i = 0;
 	result = 0;
-	minuses = 0;
-	pluses = 0;
-	while ((str[i] >= 8 && str[i] <= 13) || (str[i] == 32) || (str[i] == '+') || (str[i] == '-'))
+	sign = 1;
+	str = skip_spaces(str);
+	if (*str == '-' || *str == '+')
 	{
-		if (str[i] == '-')
-			minuses++;
-		else if (str[i] == '+')
-			pluses++;
-		i++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = result * 10 + (str[i] - '0');
-		i++;
+		result = (result * 10) + (str[i++] - '0');
+		if (result < 0 && sign == 1)
+			return ((int)LONG_MAX);
+		if (result < 0 && sign == -1)
+			return ((int)LONG_MIN);
 	}
-	if (minuses > 1 || pluses > 1)
-		return (0);
-	else if ((pluses == 1 || pluses == 0) && (minuses == 0))
-		return (result);
-	else if (minuses == 1)
-		return (-result);
-	else
-		return (0);
+	return ((int)(result * sign));
 }
