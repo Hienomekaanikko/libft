@@ -34,11 +34,19 @@ SRC	=	ft_atoi.c		\
 		ft_substr.c		\
 		ft_tolower.c	\
 		ft_toupper.c	\
+		ft_printf.c		\
+		ft_utoa.c		\
+		ft_write_hex.c	\
+		ft_write_nbrs.c	\
+		ft_write_ptr.c	\
+		ft_write_str.c	\
+		get_next_line.c \
+		get_next_line_utils.c \
 
 OBJS = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fPIC
 RM = rm -rf
 AR = ar crs
 

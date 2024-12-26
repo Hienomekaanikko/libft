@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:20:48 by msuokas           #+#    #+#             */
-/*   Updated: 2024/11/20 09:38:37 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/12/02 10:25:48 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	count_length(int n)
+static int	count_length(unsigned int n)
 {
 	int	i;
 
 	i = 0;
-	if (n <= 0)
+	if (n == 0)
 		i++;
 	while (n != 0)
 	{
@@ -27,14 +27,7 @@ static int	count_length(int n)
 	return (i);
 }
 
-static int	check_if_neg(int n)
-{
-	if (n < 0)
-		n = -n;
-	return (n);
-}
-
-char	*ft_itoa(int n)
+char	*ft_utoa(unsigned int n)
 {
 	char	*str;
 	int		str_length;
@@ -46,14 +39,9 @@ char	*ft_itoa(int n)
 	if (str == NULL)
 		return (NULL);
 	str[str_length] = '\0';
-	if (n < 0)
-	{
-		str[0] = '-';
-		i--;
-	}
 	while (str_length-- && i > 0)
 	{
-		str[str_length] = check_if_neg(n) % 10 + '0';
+		str[str_length] = n % 10 + '0';
 		n /= 10;
 		i--;
 	}
